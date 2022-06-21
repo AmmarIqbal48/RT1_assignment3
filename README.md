@@ -204,5 +204,5 @@ The purpose of this node is monitoring the velocity resulting from the user's in
 /scan: to get information about the position of the robot with respect to surrounding obstacles;
 Moreover, after having updated the input velocity, the node publishes it on the /assisted/cmd_vel topic.
 
-
+The real logic of the node is implemented by the utility function avoid_collision, which is in charge of updating the input velocity, when necessary, every time that a new LaserScan message is published on the /scan topic.
 
