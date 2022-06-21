@@ -44,14 +44,20 @@ The command launches both the files **_simulation_gmapping_** and **_move_base_*
 To satisfy the requirments there  3 different nodes inside the package (USER_INTERFAEC ASSISTIVE & MANUALL) , the simulation enviroment  was provided by the professor, essentially you have to install the slam_gmapping package.
 
 **USER_INTERFACE**
-This node represent the iterface of the project to user it communicates with both the node and the user, It get the inputs from the user via terminal and performs the given task.
+This node represent the iterface of the project to user it communicates with both the node and the user (As shown in above figure ), It get the inputs from the user via terminal and performs the given task.
 
 ``
  mode = input('Select a driving mode or press \'q\' to exit: ')
 
+
+  # If the user has selected the automatic mode, publish the message on /cmd_vel
+    if (mode == '1'):
+        pub.publish(msg)   %%% If user press the **1** from the keyboard is takes target_position(x & y coordinates) from the user and then publish the msg to (/automatic/cmd_vel)  run the robot in given tirget
+        
+        
+       
         # autonomous mode
-        if (mode == '1'):
-            print('\n========================================================================\n')
+        if (mode == '1'):      
             print('AUTONOMOUS MODE')
             nav_cmd= ''
             while (nav_cmd != 'b'):
