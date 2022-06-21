@@ -50,14 +50,14 @@ This node represent the iterface of the project to user it communicates with bot
  mode = input('Select a driving mode or press \'q\' to exit: ')
 
 
-  # If the user has selected the automatic mode, publish the message on /cmd_vel
-    if (mode == '1'):
+  
+    **if (mode == '1'):**
         pub.publish(msg)   %%% If user press the **1** from the keyboard is takes target_position(x & y coordinates) from the user and then publish the msg to (/automatic/cmd_vel)  run the robot in given tirget
         
         
        
-        # autonomous mode
-        if (mode == '1'):      
+   **_autonomous mode_**
+   if (mode == '1'):      
             print('AUTONOMOUS MODE')
             nav_cmd= ''
             while (nav_cmd != 'b'):
@@ -88,13 +88,11 @@ This node represent the iterface of the project to user it communicates with bot
             null_vel.angular.z= 0
             pub.publish(null_vel)
 
-        # manual mode
-        elif (mode == '2'):
-            print('\n========================================================================\n')
-            print('MANUAL MODE\n')
-            print('Switch to the teleop_twist_keyboard node to control the robot.')
-
-            print('\nEnter \'b\' at any time to return nav_cmd to the main menu...')
+ 
+   **_manual mode_** 
+   If user press the **2** from the keyboard it enable the teleop_mode and let the user to control the completely 
+        elif (mode == '2')
+            print('MANUAL MODE\n')            
             nav_cmd= ''
             while (nav_cmd != 'b'):
                 nav_cmd= input()
@@ -107,13 +105,11 @@ This node represent the iterface of the project to user it communicates with bot
             null_vel.angular.z= 0
             pub.publish(null_vel)
 
-        # assisted mode
-        elif (mode == '3'):
-            print('\n========================================================================\n')
+   **_assisted mode_**
+   If user press the **3** from the keyboard it enable the Assistive_mode and let the user to control robot and also assist the user to   prevent the robot to smash into walls
+   
+           elif (mode == '3'):
             print('ASSISTED MODE\n')
-            print('Switch to the teleop_twist_keyboard node to control the robot.')
-
-            print('\nEnter \'b\' at any time to return nav_cmd to the main menu...')
             nav_cmd= ''
             while (nav_cmd != 'b'):
                 nav_cmd= input()
@@ -134,3 +130,79 @@ This node represent the iterface of the project to user it communicates with bot
         else:
             print('Invalid command, please try again.\n')
 ``
+
+
+**ASSISTIVE MODE** 
+In this node  the collision avidace algorithm is implimented inside the telep_twist_keyboard node that created a new node named assistive node 
+
+`` 
+the following method is used in the teleop node  
+
+  **update the linear and angular velocities in order to avoid collisions**
+    if regions['front'] > 0.7 and regions['fleft'] > 0.7 and regions['fright'] > 0.7:
+        state_description = 'case 1 - no obstacle detected'
+    """
+
+    if regions['front'] < 0.7 and regions['fleft'] > 0.7 and regions['fright'] > 0.7:
+        state_description = 'case 2 - obstacle in the front'
+        # don't go straight
+        if (linear_x > 0) and (angular_z == 0):
+            linear_x= 0
+            angular_z= 0
+
+    elif regions['front'] > 0.7 and regions['fleft'] > 0.7 and regions['fright'] < 0.7:
+        state_description = 'case 3 -  obstacle in the fright'
+        # don't turn fright
+        if (linear_x > 0) and (angular_z < 0):
+            linear_x= 0
+            angular_z= 0
+
+    elif regions['front'] > 0.7 and regions['fleft'] < 0.7 and regions['fright'] > 0.7:
+        state_description = 'case 4 -  obstacle in the fleft'
+        # don't turn fleft
+        if (linear_x > 0) and (angular_z > 0):
+            linear_x= 0
+            angular_z= 0
+
+    elif regions['front'] < 0.7 and regions['fleft'] > 0.7 and regions['fright'] < 0.7:
+        state_description = 'case 5 - obstacle in the front and fright'
+        # don't go straight or turn fright
+        if (linear_x > 0) and (angular_z <= 0):
+            linear_x= 0
+            angular_z= 0
+
+    elif regions['front'] < 0.7 and regions['fleft'] < 0.7 and regions['fright'] > 0.7:
+        state_description = 'case 6 -  obstacle in the front and fleft'
+        # don't go straight or turn fleft
+        if (linear_x > 0) and (angular_z >= 0):
+            linear_x= 0
+            angular_z= 0
+
+    elif regions['front'] < 0.7 and regions['fleft'] < 0.7 and regions['fright'] < 0.7:
+        state_description = 'case 7 -  obstacle in the front and fleft and fright'
+        # don't go straight, turn fright or fleft
+        if (linear_x > 0):
+            linear_x= 0
+            angular_z= 0
+
+    elif regions['front'] > 0.7 and regions['fleft'] < 0.7 and regions['fright'] < 0.7:
+        state_description = 'case 8 -  obstacle in the fleft and fright'
+        # don't turn fright or fleft
+        if (linear_x > 0) and (angular_z != 0):
+            linear_x= 0
+            angular_z= 0
+
+    else:
+        state_description = 'unknown case'
+        rospy.loginfo(regions)
+
+``
+
+The purpose of this node is monitoring the velocity resulting from the user's input and, if necessary, updating it in order to avoid collisions with the external environment. In order to do so, after being initialized, the node subscribes to the following topics:
+
+/manual/cmd_vel: to get the velocity resulting from the user's input;
+/scan: to get information about the position of the robot with respect to surrounding obstacles;
+Moreover, after having updated the input velocity, the node publishes it on the /assisted/cmd_vel topic.
+
+
+
