@@ -4,7 +4,7 @@
 
 ## Introduction  
 
-This is the third Assignment of the corse Research_Track_1 in this Assignment  we asked  to create architecture on ROS and its softwear capable of controlling a mobile robot in given enviroment along with  creating a multiple modes for the user in  which  user allow to choose how to control the robot.
+This is the third Assignment of the course Research_Track_1 in this Assignment  we asked  to create architecture on ROS and its softwear capable of controlling a mobile robot in given enviroment along with  creating a multiple modes for the user in  which  user allow to choose how to control the robot.
 
 **_FOLLOWING ARE THE MODE_**
 
@@ -204,3 +204,8 @@ Moreover, after having updated the input velocity, the node publishes it on the 
 
 The real logic of the node is implemented by the utility function avoid_collision, which is in charge of updating the input velocity, when necessary, every time that a new LaserScan message is published on the /scan topic.
 
+### FLOW CHAT
+ ![Assignment_3 flow chat](https://user-images.githubusercontent.com/104999107/175319809-35b5946d-35e5-4357-b843-a049b3213371.png)
+
+### rqt_graph
+![image](https://user-images.githubusercontent.com/104999107/175324777-710e69f4-d1a4-44ac-b249-0b68df7a3d98.png)
