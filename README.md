@@ -1,8 +1,6 @@
 # RT1_Assignment3 
 
-Made by **ammar Iqbal**
-
-Student ID :** ------**
+![image](https://user-images.githubusercontent.com/104999107/175319134-b176e12a-ffb1-44e7-954a-a002ee869f38.png)
 
 ## Introduction  
 
