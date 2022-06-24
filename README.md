@@ -205,3 +205,7 @@ The real logic of the node is implemented by the utility function avoid_collisio
 
 ### rqt_graph
 ![image](https://user-images.githubusercontent.com/104999107/175324777-710e69f4-d1a4-44ac-b249-0b68df7a3d98.png)
+
+## Conclusion And Future Work
+
+In the assisted driving mode, the robot avoid obstacles in the front/left/right related to its vision field, but since it can go also backwards it will inevitably crush on the back side, not avoiding the wall. Future improvements can be done, in order to avoid hitting the wall on the back side, probably using the geometry and the space of the environment.
