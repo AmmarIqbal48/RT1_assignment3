@@ -201,10 +201,10 @@ Moreover, after having updated the input velocity, the node publishes it on the 
 The real logic of the node is implemented by the utility function avoid_collision, which is in charge of updating the input velocity, when necessary, every time that a new LaserScan message is published on the /scan topic.
 
 ### FLOW CHAT
- ![Assignment_3 flow chat](https://user-images.githubusercontent.com/104999107/175319809-35b5946d-35e5-4357-b843-a049b3213371.png)
 
-### rqt_graph
-![image](https://user-images.githubusercontent.com/104999107/175324777-710e69f4-d1a4-44ac-b249-0b68df7a3d98.png)
+![Flow Chart](https://user-images.githubusercontent.com/104999107/175574643-dee71a30-2e1f-4dcd-84e8-927602954e39.jpeg)
+
+### rqt_graph![image](https://user-images.githubusercontent.com/104999107/175324777-710e69f4-d1a4-44ac-b249-0b68df7a3d98.png)
 
 ## Conclusion And Future Work
 
