@@ -28,7 +28,7 @@ Once that you've everything ready, Create your workspace and then clone the repo
 Then, launch the package in your terminal by using  following command:
 
 ``
-$ roslaunch final_assignment.launch
+$ roslaunch final_assignment final_assignment.launch
 ``
 
 The command launches both the files **_simulation_gmapping_** and **_move_base_**, plus the nodes **_teleop_**, **_user_interface_** and **_Assistive_mode _**. In particular, the latter two are the ones that have been specifically developed for the assignment.
