@@ -320,7 +320,7 @@ def vels(speed, turn):
 if __name__=="__main__":
 
       # initialize the node
-    rospy.init_node('collision_avoidance')
+    rospy.init_node('Assistive_teleop')
 
     # define a publisher to the /assisted/cmd_vel topic
 
