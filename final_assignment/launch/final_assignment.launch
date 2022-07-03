@@ -8,7 +8,7 @@
   </node>
   <node name="user_interface" pkg="final_assignment" type="user_interface.py" launch-prefix="xterm -fa 'Monospace' -fs 12 -e" >
   </node>
-  <node name="collision_avoidance" pkg="final_assignment" type="assist.py" >
+  <node name="Assistive_teleop" pkg="final_assignment" type="assist.py" >
   </node>
 
 </launch>
